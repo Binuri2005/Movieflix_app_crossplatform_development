@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../client/firebase_database_services.dart';
 
+// InforContainer widget definition
 class InforContainer extends StatelessWidget {
   const InforContainer({
     super.key,
@@ -14,12 +15,14 @@ class InforContainer extends StatelessWidget {
 
   final Movie movie;
 
+// Method to save movie to database
   void _saveMovieToDatabase(User user, Movie movie) async {
     print(user);
     print(movie);
     DatabaseService(uid: user.uid).updateSavedMovies(movie);
   }
 
+  // Build method to create the widget
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User?>(context);
