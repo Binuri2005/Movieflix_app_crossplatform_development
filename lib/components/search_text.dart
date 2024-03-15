@@ -1,10 +1,13 @@
+// Import statement for material.dart package
 import 'package:flutter/material.dart';
 
+// SearchText widget definition
 class SearchText extends StatelessWidget {
   const SearchText({
     super.key,
   });
 
+// Build method to create the widget
   @override
   Widget build(BuildContext context) {
     return TextField(
