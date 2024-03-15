@@ -1,3 +1,5 @@
+// Import statements
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app_example/client/firebas_auth.dart';
@@ -9,16 +11,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/Drawer/saved_movies.dart';
 
+// AppDrawer class definition
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key});
 
-// save user name and pasword in local storage
+// Method to save user credentials in local storage
   _saveCredentials(userName, Password) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('username', userName);
     prefs.setString('password', Password);
   }
 
+// Build method to create the drawer widget
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User?>(context);
