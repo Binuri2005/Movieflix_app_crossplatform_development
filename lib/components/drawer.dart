@@ -12,6 +12,7 @@ import '../screens/Drawer/saved_movies.dart';
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key});
 
+// save user name and pasword in local storage
   _saveCredentials(userName, Password) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('username', userName);
