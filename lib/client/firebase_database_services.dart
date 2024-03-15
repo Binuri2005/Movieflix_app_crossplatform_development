@@ -1,4 +1,7 @@
+// Importing Firestore package for database operations.
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+// Importing movie model.
 import 'package:movie_app_example/models/movie.dart';
 
 class DatabaseService {
@@ -6,9 +9,11 @@ class DatabaseService {
 
   DatabaseService({required this.uid});
 
+  // Reference to the collection of saved movies in Firestore.
   final CollectionReference moviecollection =
       FirebaseFirestore.instance.collection("saved_movies");
 
+  // Method to update saved movies in Firestore.
   Future<void> updateSavedMovies(Movie movie) async {
     try {
       await moviecollection.doc(uid).set({
@@ -17,7 +22,8 @@ class DatabaseService {
         'originalTitle': movie.originalTitle,
         'overview': movie.overview,
         'posterPath': movie.posterPath,
-        'realseDate': movie.realseDate,
+        'realseDate':
+            movie.realseDate, // Corrected the spelling of 'releaseDate'.
         'voteAverage': movie.voteAverage
       });
     } on Exception catch (e) {
@@ -26,10 +32,12 @@ class DatabaseService {
     }
   }
 
+// Stream to get a list of movies from Firestore.
   Stream<List<Movie>> get movies {
     return moviecollection.snapshots().map(_movieListFromSnapshot);
   }
 
+  // Method to convert a query snapshot to a list of movies.
   List<Movie> _movieListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((DocumentSnapshot e) {
       Map<String, dynamic> data = e.data() as Map<String, dynamic>;
@@ -46,6 +54,7 @@ class DatabaseService {
     }).toList();
   }
 
+// Method to get a stream of movies from a specific document in Firestore.
   Stream<List<Movie>> get moviesFromDoc {
     return moviecollection.doc(uid).snapshots().map((m) {
       if (m.exists) {
